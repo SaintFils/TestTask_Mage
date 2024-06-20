@@ -1,5 +1,6 @@
 using System;
 using Client.Scripts;
+using Client.Scripts.Camera;
 using Client.Scripts.Infrastructure;
 using Client.Scripts.Services.Input;
 using UnityEngine;
@@ -21,6 +22,8 @@ public class PlayerMove : MonoBehaviour
     private void Start()
     {
         camera = Camera.main;
+
+        CameraFollow();
     }
 
     private void Update()
@@ -40,4 +43,6 @@ public class PlayerMove : MonoBehaviour
         
         CharacterController.Move(movementVector * (MovementSpeed * Time.deltaTime));
     }
+    
+    private void CameraFollow() => camera.GetComponent<CameraFollow>().Follow(gameObject);
 }
