@@ -1,17 +1,17 @@
-using System;
 using Client.Scripts.Infrastructure;
 using UnityEngine;
 
-public class GameBootstrapper : MonoBehaviour
+public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
 {
-    [SerializeField, Header("Just temp solution for using mouse")] private bool mouseToggle = true;
-    private Game game;
+    public LoadingScreen LoadingScreen;
     
+    private Game game;
     
     private void Awake()
     {
-        game = new Game(mouseToggle);
+        game = new Game(this, LoadingScreen);
+        game.StateMachine.Enter<BootstrapState>();
         
         DontDestroyOnLoad(this);
     }
-}
+} 

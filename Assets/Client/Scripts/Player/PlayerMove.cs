@@ -1,6 +1,5 @@
 using System;
 using Client.Scripts;
-using Client.Scripts.Camera;
 using Client.Scripts.Infrastructure;
 using Client.Scripts.Services.Input;
 using UnityEngine;
@@ -12,18 +11,10 @@ public class PlayerMove : MonoBehaviour
     public float RotationSpeed;
     
     private IInputService inputService;
-    private Camera camera;
     
     private void Awake()
     {
         inputService = Game.InputService;
-    }
-
-    private void Start()
-    {
-        camera = Camera.main;
-
-        CameraFollow();
     }
 
     private void Update()
@@ -32,7 +23,7 @@ public class PlayerMove : MonoBehaviour
 
         if (inputService.Axis.sqrMagnitude > Constants.Epsilon)
         {
-            movementVector = camera.transform.TransformDirection(inputService.Axis);
+            movementVector = Camera.main.transform.TransformDirection(inputService.Axis);
             movementVector.y = 0;
             movementVector.Normalize();
         }
@@ -44,5 +35,5 @@ public class PlayerMove : MonoBehaviour
         CharacterController.Move(movementVector * (MovementSpeed * Time.deltaTime));
     }
     
-    private void CameraFollow() => camera.GetComponent<CameraFollow>().Follow(gameObject);
+    
 }

@@ -5,14 +5,11 @@ namespace Client.Scripts.Infrastructure
     public class Game
     {
         public static IInputService InputService;
+        public GameStateMachine StateMachine;
 
-        public Game(bool isMouse)
+        public Game(ICoroutineRunner coroutineRunner, LoadingScreen loadingScreen)
         {
-            //here we can check platform and add service for our platform (mobile or PC for example)
-            if (isMouse)
-                InputService = new DesktopMouseInputService();
-            else
-                InputService = new DesktopKeyboardInputService(); 
+            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), loadingScreen);
         }
     }
     
