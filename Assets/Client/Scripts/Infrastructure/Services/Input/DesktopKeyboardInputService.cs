@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Client.Scripts.Services.Input
+﻿namespace Client.Scripts.Infrastructure.Services.Input
 {
     public sealed class DesktopKeyboardInputService : DesktopAxisInputService
     {

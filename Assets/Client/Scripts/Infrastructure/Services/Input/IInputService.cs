@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Client.Scripts.Services.Input
+namespace Client.Scripts.Infrastructure.Services.Input
 {
-    public interface IInputService
+    public interface IInputService : IService
     {
         Vector2 Axis { get; }
         float RotationInput { get; }

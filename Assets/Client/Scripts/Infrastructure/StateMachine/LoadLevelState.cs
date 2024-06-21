@@ -13,11 +13,12 @@ namespace Client.Scripts.Infrastructure.StateMachine
         private readonly LoadingScreen loadingScreen;
         private readonly IGameFactory gameFactory;
 
-        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingScreen loadingScreen)
+        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingScreen loadingScreen, IGameFactory gameFactory)
         {
             this.gameStateMachine = gameStateMachine;
             this.sceneLoader = sceneLoader;
             this.loadingScreen = loadingScreen;
+            this.gameFactory = gameFactory;
         }
 
         public void Enter(string sceneName)

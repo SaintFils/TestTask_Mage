@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Client.Scripts.Infrastructure.Factory;
+using Client.Scripts.Infrastructure.Services;
+using Client.Scripts.Infrastructure.Services.Progress;
 
 namespace Client.Scripts.Infrastructure.StateMachine
 {
@@ -8,12 +11,13 @@ namespace Client.Scripts.Infrastructure.StateMachine
         private readonly Dictionary<Type,IExitableState> states;
         private IExitableState activeState;
 
-        public GameStateMachine(SceneLoader sceneLoader, LoadingScreen loadingScreen)
+        public GameStateMachine(SceneLoader sceneLoader, LoadingScreen loadingScreen, ServiceLocator services)
         {
             states = new Dictionary<Type, IExitableState>()
             {
-                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingScreen),
+                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
+                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingScreen, services.Single<IGameFactory>()),
+                [typeof(LoadProgressState)] = new LoadProgressState(this, services.Single<IPersistentProgressService>()),
                 [typeof(GameLoopState)] = new GameLoopState(this),
             };
         }

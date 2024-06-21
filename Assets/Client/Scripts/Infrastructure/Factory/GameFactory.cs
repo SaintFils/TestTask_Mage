@@ -5,9 +5,9 @@ namespace Client.Scripts.Infrastructure.Factory
 {
     public class GameFactory : IGameFactory
     {
-        private readonly IAssetProvider assets;
+        private readonly IAssets assets;
 
-        public GameFactory(IAssetProvider assets)
+        public GameFactory(IAssets assets)
         {
             this.assets = assets;
         }

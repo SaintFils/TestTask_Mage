@@ -1,4 +1,8 @@
-﻿using Client.Scripts.Services.Input;
+﻿using Client.Scripts.Infrastructure.AssetManagement;
+using Client.Scripts.Infrastructure.Factory;
+using Client.Scripts.Infrastructure.Services;
+using Client.Scripts.Infrastructure.Services.Input;
+using Client.Scripts.Infrastructure.Services.Progress;
 
 namespace Client.Scripts.Infrastructure.StateMachine
 {
@@ -7,32 +11,37 @@ namespace Client.Scripts.Infrastructure.StateMachine
         private const string Initial = "Initial";
         private readonly GameStateMachine stateMachine;
         private readonly SceneLoader sceneLoader;
+        private readonly ServiceLocator services;
 
-        public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader)
+        public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader, ServiceLocator services)
         {
             this.stateMachine = stateMachine;
             this.sceneLoader = sceneLoader;
+            this.services = services;
+            
+            RegisterServices();
         }
 
         public void Enter()
         {
-            RegisterServices();
             sceneLoader.Load(Initial, onLoaded: EnterLoadLevel);
+        }
+        
+        public void Exit()
+        {
         }
 
         private void EnterLoadLevel() => stateMachine.Enter<LoadLevelState, string>("Main");
 
         private void RegisterServices()
         {
-            Game.InputService = RegisterInputService();
+            services.RegisterSingle<IInputService>(InputService());
+            services.RegisterSingle<IAssets>(new AssetProvider());
+            services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
+            services.RegisterSingle<IGameFactory>(new GameFactory(services.Single<IAssets>()));
         }
 
-        public void Exit()
-        {
-            
-        }
-
-        private static IInputService RegisterInputService()
+        private static IInputService InputService()
         {
             //here we can check platform and add service for our platform (mobile or PC for example)
             return new DesktopMouseInputService();
