@@ -1,4 +1,4 @@
-﻿namespace Client.Scripts.Infrastructure
+﻿namespace Client.Scripts.Infrastructure.StateMachine
 {
     public class GameLoopState : IState
     {

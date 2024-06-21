@@ -1,4 +1,5 @@
 using Client.Scripts.Infrastructure;
+using Client.Scripts.Infrastructure.StateMachine;
 using UnityEngine;
 
 public class GameBootstrapper : MonoBehaviour, ICoroutineRunner

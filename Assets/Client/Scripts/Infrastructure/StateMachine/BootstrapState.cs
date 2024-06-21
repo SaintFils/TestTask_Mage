@@ -1,6 +1,6 @@
 ﻿using Client.Scripts.Services.Input;
 
-namespace Client.Scripts.Infrastructure
+namespace Client.Scripts.Infrastructure.StateMachine
 {
     public class BootstrapState : IState
     {

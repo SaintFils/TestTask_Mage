@@ -1,16 +1,17 @@
 ﻿using Client.Scripts.CameraLogic;
+using Client.Scripts.Infrastructure.Factory;
 using UnityEngine;
 
-namespace Client.Scripts.Infrastructure
+namespace Client.Scripts.Infrastructure.StateMachine
 {
     public class LoadLevelState : IPayloadedState<string>
     {
         private const string InitialPointTag = "InitialPoint";
-        private const string PlayerPath = "Player/Player";
-        private const string HudPath = "Hud/HUD";
+        
         private readonly GameStateMachine gameStateMachine;
         private readonly SceneLoader sceneLoader;
         private readonly LoadingScreen loadingScreen;
+        private readonly IGameFactory gameFactory;
 
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingScreen loadingScreen)
         {
@@ -29,10 +30,9 @@ namespace Client.Scripts.Infrastructure
 
         private void OnLoaded()
         {
-            GameObject initialPoint = GameObject.FindWithTag(InitialPointTag);
-            GameObject player = Instantiate(PlayerPath, initialPoint.transform.position);
+            GameObject player = gameFactory.CreatePlayer(GameObject.FindWithTag(InitialPointTag));
             
-            Instantiate(HudPath);
+            gameFactory.CreateHud();
             
             CameraFollow(player);
             
@@ -44,18 +44,6 @@ namespace Client.Scripts.Infrastructure
             Camera.main
                 .GetComponent<CameraFollow>()
                 .Follow(player);
-        }
-
-        private static GameObject Instantiate(string path)
-        {
-            var prefab = Resources.Load<GameObject>(path);
-            return Object.Instantiate(prefab);
-        }
-        
-        private static GameObject Instantiate(string path, Vector3 point)
-        {
-            var prefab = Resources.Load<GameObject>(path);
-            return Object.Instantiate(prefab, point, Quaternion.identity);
         }
     }
 }

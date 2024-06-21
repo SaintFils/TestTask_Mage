@@ -1,4 +1,5 @@
-﻿using Client.Scripts.Services.Input;
+﻿using Client.Scripts.Infrastructure.StateMachine;
+using Client.Scripts.Services.Input;
 
 namespace Client.Scripts.Infrastructure
 {

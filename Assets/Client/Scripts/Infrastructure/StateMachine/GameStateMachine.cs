@@ -1,8 +1,7 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace Client.Scripts.Infrastructure
+namespace Client.Scripts.Infrastructure.StateMachine
 {
     public class GameStateMachine
     {
