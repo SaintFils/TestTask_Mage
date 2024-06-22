@@ -1,6 +1,4 @@
-﻿using Client.Scripts.Infrastructure.Factory;
-
-namespace Client.Scripts.Infrastructure.Services
+﻿namespace Client.Scripts.Infrastructure.Services
 {
     public class ServiceLocator
     {

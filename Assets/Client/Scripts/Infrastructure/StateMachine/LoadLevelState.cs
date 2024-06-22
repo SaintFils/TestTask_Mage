@@ -24,6 +24,7 @@ namespace Client.Scripts.Infrastructure.StateMachine
         public void Enter(string sceneName)
         {
             loadingScreen.Show();
+            gameFactory.Cleanup();
             sceneLoader.Load(sceneName, OnLoaded);
         }
 
@@ -31,13 +32,18 @@ namespace Client.Scripts.Infrastructure.StateMachine
 
         private void OnLoaded()
         {
+            InitGameWorld();
+
+            gameStateMachine.Enter<GameLoopState>();
+        }
+
+        private void InitGameWorld()
+        {
             GameObject player = gameFactory.CreatePlayer(GameObject.FindWithTag(InitialPointTag));
             
             gameFactory.CreateHud();
             
             CameraFollow(player);
-            
-            gameStateMachine.Enter<GameLoopState>();
         }
 
         private static void CameraFollow(GameObject player)
