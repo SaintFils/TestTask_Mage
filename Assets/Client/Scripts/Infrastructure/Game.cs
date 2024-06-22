@@ -1,5 +1,6 @@
 ﻿using Client.Scripts.Infrastructure.Services;
 using Client.Scripts.Infrastructure.StateMachine;
+using Client.Scripts.Logic;
 
 namespace Client.Scripts.Infrastructure
 {

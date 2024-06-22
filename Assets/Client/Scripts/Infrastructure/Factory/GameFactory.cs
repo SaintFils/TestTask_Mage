@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Client.Scripts.Infrastructure.AssetManagement;
 using Client.Scripts.Infrastructure.Services.Progress;
 using UnityEngine;
@@ -12,7 +13,10 @@ namespace Client.Scripts.Infrastructure.Factory
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
         
-        
+        public GameObject PlayerGameObject { get; private set; }
+        public event Action PlayerCreated;
+
+
         public GameFactory(IAssets assets)
         {
             this.assets = assets;
@@ -20,9 +24,12 @@ namespace Client.Scripts.Infrastructure.Factory
         
         public GameObject CreatePlayer(GameObject point)
         {
-            GameObject gameObject = assets.Instantiate(AssetPath.PlayerPath, point.transform.position);
+            GameObject gameObject = assets.Instantiate(AssetPath.PlayerPath, point.transform.position + new Vector3(0, 0.5f, 0));
 
             RegisterProgressWatchers(gameObject); //part of placeholder for save/load progress feature
+
+            PlayerGameObject = gameObject;
+            PlayerCreated?.Invoke();
             
             return gameObject;
         }

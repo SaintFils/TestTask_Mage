@@ -1,5 +1,6 @@
 ﻿using Client.Scripts.CameraLogic;
 using Client.Scripts.Infrastructure.Factory;
+using Client.Scripts.Logic;
 using UnityEngine;
 
 namespace Client.Scripts.Infrastructure.StateMachine

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Client.Scripts.Infrastructure.Factory;
 using Client.Scripts.Infrastructure.Services;
 using Client.Scripts.Infrastructure.Services.Progress;
+using Client.Scripts.Logic;
 
 namespace Client.Scripts.Infrastructure.StateMachine
 {
