@@ -16,7 +16,6 @@ namespace Client.Scripts.Infrastructure.Factory
         public GameObject PlayerGameObject { get; private set; }
         public event Action PlayerCreated;
 
-
         public GameFactory(IAssets assets)
         {
             this.assets = assets;
@@ -24,7 +23,7 @@ namespace Client.Scripts.Infrastructure.Factory
         
         public GameObject CreatePlayer(GameObject point)
         {
-            GameObject gameObject = assets.Instantiate(AssetPath.PlayerPath, point.transform.position + new Vector3(0, 0.5f, 0));
+            GameObject gameObject = assets.Instantiate(AssetPath.PlayerPath, point.transform.position + new Vector3(0, .5f, 0));
 
             RegisterProgressWatchers(gameObject); //part of placeholder for save/load progress feature
 
@@ -34,7 +33,7 @@ namespace Client.Scripts.Infrastructure.Factory
             return gameObject;
         }
 
-        public void CreateHud() => assets.Instantiate(AssetPath.HudPath);
+        public GameObject CreateHud() => assets.Instantiate(AssetPath.HudPath);
 
         public void Cleanup()
         {

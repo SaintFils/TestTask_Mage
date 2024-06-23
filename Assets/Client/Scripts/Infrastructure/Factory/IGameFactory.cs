@@ -9,7 +9,7 @@ namespace Client.Scripts.Infrastructure.Factory
     public interface IGameFactory : IService
     {
         GameObject CreatePlayer(GameObject point);
-        void CreateHud();
+        GameObject CreateHud();
         List<ISavedProgressReader> ProgressReaders { get; }
         List<ISavedProgress> ProgressWriters { get; }
         GameObject PlayerGameObject { get; }

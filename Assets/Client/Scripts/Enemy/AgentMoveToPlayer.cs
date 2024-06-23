@@ -22,7 +22,6 @@ namespace Client.Scripts.Enemy
                 InitializePlayerTransform();
             else
                 gameFactory.PlayerCreated += OnPlayerCreated;
-            
         }
 
         private void Update()

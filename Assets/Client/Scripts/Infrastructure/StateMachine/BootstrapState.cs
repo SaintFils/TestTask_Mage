@@ -31,13 +31,14 @@ namespace Client.Scripts.Infrastructure.StateMachine
         {
         }
 
-        private void EnterLoadLevel() => stateMachine.Enter<LoadLevelState, string>("Main");
+        private void EnterLoadLevel() => stateMachine.Enter<LoadProgressState>();
 
         private void RegisterServices()
         {
             services.RegisterSingle<IInputService>(InputService());
             services.RegisterSingle<IAssets>(new AssetProvider());
             services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
+            services.RegisterSingle<ISaveLoadService>(new SaveLoadService(services.Single<IPersistentProgressService>(), services.Single<IGameFactory>()));
             services.RegisterSingle<IGameFactory>(new GameFactory(services.Single<IAssets>()));
         }
 

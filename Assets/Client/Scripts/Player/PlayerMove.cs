@@ -8,9 +8,9 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour, ISavedProgress
 {
-    public CharacterController CharacterController;
-    public float MovementSpeed;
-    public float RotationSpeed;
+    [SerializeField] private CharacterController CharacterController;
+    [SerializeField] private float MovementSpeed;
+    [SerializeField] private float RotationSpeed;
     
     private IInputService inputService;
     
@@ -48,7 +48,11 @@ public class PlayerMove : MonoBehaviour, ISavedProgress
         {
             Vector3Data savedPosition = progress.WorldData.PositionOnLevel.Position;
             if (savedPosition != null)
-                transform.position = savedPosition.AsUnityVector(); //later we can adjust this line by turning off and on Character controller to avoid phisics bugs
+            {
+                CharacterController.enabled = false;
+                transform.position = savedPosition.AsUnityVector();  
+                CharacterController.enabled = true;
+            }
         }
     }
     private static string CurrentLevelName() => SceneManager.GetActiveScene().name;

@@ -17,8 +17,8 @@ namespace Client.Scripts.Infrastructure.StateMachine
             states = new Dictionary<Type, IExitableState>()
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingScreen, services.Single<IGameFactory>()),
-                [typeof(LoadProgressState)] = new LoadProgressState(this, services.Single<IPersistentProgressService>()),
+                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingScreen, services.Single<IGameFactory>(), services.Single<IPersistentProgressService>()),
+                [typeof(LoadProgressState)] = new LoadProgressState(this, services.Single<IPersistentProgressService>(),services.Single<ISaveLoadService>() ),
                 [typeof(GameLoopState)] = new GameLoopState(this),
             };
         }
@@ -28,7 +28,6 @@ namespace Client.Scripts.Infrastructure.StateMachine
             TState state = ChangeState<TState>();
             state.Enter();
         }
-
 
         public void Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadedState<TPayload>
         {
