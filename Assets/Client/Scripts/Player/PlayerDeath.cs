@@ -8,6 +8,7 @@ namespace Client.Scripts.Player
     {
         [SerializeField] private PlayerHealth health;
         [SerializeField] private PlayerMove move;
+        [SerializeField] private PlayerAttack attack;
         [SerializeField] private GameObject deathEffect;
         private bool isDead;
 
@@ -26,6 +27,7 @@ namespace Client.Scripts.Player
             isDead = true;
             
             move.enabled = false;
+            attack.enabled = false;
             Instantiate(deathEffect, transform.position, Quaternion.identity);
         }
     }

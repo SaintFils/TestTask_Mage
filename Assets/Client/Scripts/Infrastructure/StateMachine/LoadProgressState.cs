@@ -39,6 +39,7 @@ namespace Client.Scripts.Infrastructure.StateMachine
             playerProgress.HealthStatus.MaxHealth = 50;
             playerProgress.HealthStatus.ResetHealth();
             playerProgress.HealthStatus.Armor = 1;
+            playerProgress.PlayerStats.Damage = 10;
             
             return playerProgress;
         }

@@ -1,15 +1,16 @@
 ﻿using System;
 using Client.Scripts.Data;
 using Client.Scripts.Infrastructure.Services.Progress;
+using Client.Scripts.Logic;
 using UnityEngine;
 
 namespace Client.Scripts.Player
 {
-    public class PlayerHealth : MonoBehaviour, ISavedProgress
+    public class PlayerHealth : MonoBehaviour, ISavedProgress, IHealth
     {
         private HealthStatus healthStatus;
 
-        public Action HealthChanged;
+        public event Action HealthChanged;
         
         public float CurrentHealth
         {

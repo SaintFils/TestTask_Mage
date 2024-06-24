@@ -62,7 +62,7 @@ namespace Client.Scripts.Infrastructure.StateMachine
         {
             GameObject hud = gameFactory.CreateHud();
 
-            hud.GetComponentInChildren<ActorUI>().Construct(player.GetComponent<PlayerHealth>());
+            hud.GetComponentInChildren<ActorUI>().Construct(player.GetComponent<IHealth>());
         }
 
         private static void CameraFollow(GameObject player)

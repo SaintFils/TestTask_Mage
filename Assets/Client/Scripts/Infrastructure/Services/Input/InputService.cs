@@ -8,10 +8,14 @@ namespace Client.Scripts.Infrastructure.Services.Input
         protected const string Vertical = "Vertical";
         protected const string HorizontalArrows = "HorizontalArrows";
         protected const string MouseX = "Mouse X";
+        protected const string Attack = "Fire1";
         
         public abstract Vector2 Axis { get; }
         public virtual float RotationInput { get; }
-
-        public abstract bool IsAttackButtonUp();
+        
+        public virtual bool IsAttackButtonPressed()
+        {
+            return false;
+        }
     }
 }

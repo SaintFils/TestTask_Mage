@@ -7,6 +7,6 @@ namespace Client.Scripts.Infrastructure.Services.Input
         Vector2 Axis { get; }
         float RotationInput { get; }
 
-        bool IsAttackButtonUp();
+        bool IsAttackButtonPressed();
     }
 }

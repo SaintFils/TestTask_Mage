@@ -1,8 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Client.Scripts.Infrastructure.Factory;
 using Client.Scripts.Infrastructure.Services;
-using Client.Scripts.Player;
+using Client.Scripts.Logic;
 using UnityEngine;
 
 namespace Client.Scripts.Enemy
@@ -57,7 +56,7 @@ namespace Client.Scripts.Enemy
             if (Hit(out Collider hit))
             {
                VisualAttackHitDebug.DrawDebug(HitPosition(), cleavage, 1.5f);
-               hit.transform.GetComponent<PlayerHealth>().TakeDamage(damage);
+               hit.transform.GetComponent<IHealth>().TakeDamage(damage);
             }
         }
 

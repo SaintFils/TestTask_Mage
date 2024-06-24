@@ -7,9 +7,11 @@ namespace Client.Scripts.Data
     {
         public HealthStatus HealthStatus;
         public WorldData WorldData;
+        public Stats PlayerStats;
 
         public PlayerProgress(string initialLevel)
         {
+            PlayerStats = new Stats();
             WorldData = new WorldData(initialLevel);
             HealthStatus = new HealthStatus();
         }
